@@ -12,7 +12,7 @@ if [ -z "$DOCKER_REGISTRY" ]; then
 fi
 
 if [ -z "$TODO_PDB_NAME" ]; then
-    export TODO_PDB_NAME=$(state_get MTDR_DB_NAME)
+    export TODO_PDB_NAME=$"MTDRPBD"
     echo "TODO_PDB_NAME set."
 fi
 if [ -z "$TODO_PDB_NAME" ]; then

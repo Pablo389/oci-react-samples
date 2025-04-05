@@ -121,7 +121,7 @@ public class ToDoItemBotController extends TelegramLongPollingBot {
 
 			} else if(messageTextFromTelegram.equals(BotLabels.LIST_ALL_DEVELOPERS.getLabel())){
 				
-			} else if (messageTextFromTelegram.endsWith(BotLabels.MARK_DONE.getLabel())) {
+			} else if (messageTextFromTelegram.endsWith(BotLabels.MARK_IN_PROGRESS.getLabel())) {
 
 				String done = messageTextFromTelegram.substring(0,
 						messageTextFromTelegram.indexOf(BotLabels.DASH.getLabel()));
@@ -147,7 +147,7 @@ public class ToDoItemBotController extends TelegramLongPollingBot {
 				try {
 
 					ToDoItem item = getToDoItemById(id).getBody();
-					item.setStatus("TODO");
+					item.setStatus("INPROGRESS");
 					updateToDoItem(item, id);
 					BotHelper.sendMessageToTelegram(chatId, BotMessages.ITEM_UNDONE.getMessage(), this);
 

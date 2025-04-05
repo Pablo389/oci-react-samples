@@ -1,7 +1,7 @@
 #!/bin/bash
 # Copyright (c) 2021 Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl.
-
+source /Users/clules48/Documents/tec/6toSemestre/reto/oci-react-samples/MtdrSpring/utils/state-functions.sh
 # Fail on error
 set -e
 
@@ -54,7 +54,7 @@ while ! state_done USER_OCID; do
     USER_OCID=$TEST_USER_OCID
   fi
   # Validate
-  if test ""`oci iam user get --user-id "$USER_OCID" --query 'data."lifecycle-state"' --raw-output 2>$MTDRWORKSHOP_LOG/user_ocid_err` == 'ACTIVE'; then
+  if test ""`oci iam user get --user-id "$USER_OCID" --query 'data."lifecycle-state"' --raw-output --auth security_token 2>$MTDRWORKSHOP_LOG/user_ocid_err` == 'ACTIVE'; then
     state_set USER_OCID "$USER_OCID"
   else
     echo "That user OCID could not be validated"
@@ -75,6 +75,7 @@ done
 
 #Get Run Name from directory name
 while ! state_done RUN_NAME; do
+
   cd $MTDRWORKSHOP_LOCATION
   cd ../..
   # Validate that a folder was creared
@@ -245,7 +246,7 @@ if ! state_done UI_USERNAME; then
   echo 'Create a UI Username'
   echo
   read -s -r -p "Enter the username to be used for accessing the UI: " USERNAME
-  state_set UI_USERNAME "$USERNAME"
+  state_set UI_USERNAME "Pabis"
   export UI_USERNAME="$(state_get UI_USERNAME)"
   state_set_done UI_USERNAME
 fi
